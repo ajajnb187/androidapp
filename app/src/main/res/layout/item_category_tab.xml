@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    分类标签项布局文件
+    作用：定义横向滚动的新闻分类标签样式
+    
+    设计特点：
+    1. 直接使用TextView作为根视图，简洁高效
+    2. 应用bg_category_tab背景drawable实现选中/未选中状态样式
+    3. 固定最小宽度(70dp)确保短标题也有足够的点击区域
+    4. 文字居中显示，四周有适当内边距
+    5. 粗体字体提升可读性和视觉层次
+    
+    使用场景：
+    1. 在fragment_news_list.xml中的rv_categories列表中作为子项
+    2. 由CategoryAdapter适配器加载并绑定数据
+    3. 通过状态选择器在选中时切换颜色和背景
+-->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/bg_category_tab"
+    android:gravity="center"
+    android:minWidth="70dp"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp"
+    android:textColor="@color/category_tab_text"
+    android:textSize="16sp"
+    android:textStyle="bold" /> 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    分类管理项布局文件
+    作用：在分类管理页面中展示单个新闻分类项
+    
+    整体结构：
+    1. CardView作为卡片式外观容器
+    2. 内部使用ConstraintLayout约束定位各元素
+    3. 左侧是拖动手柄图标，用于排序
+    4. 中间是分类名称文本
+    5. 右侧是启用/禁用开关
+    
+    交互功能：
+    1. 可通过拖动手柄上下拖拽排序分类的显示顺序
+    2. 可通过开关控制是否显示该分类
+    3. 整体使用卡片样式提供清晰的层次感和触摸反馈
+-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- 
+            拖动手柄图标
+            作用：提供视觉提示和拖拽排序功能
+            特点：
+            1. 位于左侧，大小为24dp×24dp
+            2. 使用系统自带的排序图标
+            3. 使用ItemTouchHelper实现拖拽功能
+            4. 添加了内容描述以提高无障碍可访问性
+        -->
+        <ImageView
+            android:id="@+id/iv_drag_handle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="拖动排序"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 
+            分类名称文本
+            作用：显示分类的名称
+            特点：
+            1. 位于拖动手柄右侧，开关左侧
+            2. 自动填充剩余水平空间
+            3. 使用粗体提升可读性
+            4. 两侧设置16dp边距确保文本不会过于贴近其他元素
+        -->
+        <TextView
+            android:id="@+id/tv_category_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switch_enabled"
+            app:layout_constraintStart_toEndOf="@+id/iv_drag_handle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 
+            启用/禁用开关
+            作用：控制分类是否显示在新闻列表页面
+            特点：
+            1. 位于右侧，使用SwitchCompat组件确保向后兼容性
+            2. 开启状态表示该分类会显示在新闻列表页面
+            3. 关闭状态表示该分类将被隐藏
+            4. 开关状态变化会触发监听器更新数据库中的分类状态
+        -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_enabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView> 

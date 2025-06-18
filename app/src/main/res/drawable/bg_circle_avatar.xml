@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    圆形头像背景样式定义文件
+    作用：定义头像的圆形形状和默认背景色
+    特点：
+    1. 使用oval形状创建完美圆形
+    2. 默认背景色为浅灰色(#EEEEEE)，在头像加载前或无头像时显示
+    3. 常用于用户头像的占位背景
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#EEEEEE" />
+</shape> 

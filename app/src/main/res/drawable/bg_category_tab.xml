@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    分类标签背景样式定义文件
+    作用：定义分类标签在选中和未选中状态下的不同外观
+    包含两种状态：
+    1. 选中状态：使用主题色背景，深色边框
+    2. 未选中状态：使用淡灰色背景，浅灰色边框
+    两种状态都使用圆角矩形形状，圆角半径为20dp
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 选中状态样式 -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="?attr/colorPrimary" />
+            <stroke android:width="1dp" android:color="?attr/colorPrimaryDark" />
+        </shape>
+    </item>
+    <!-- 默认（未选中）状态样式 -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#F5F5F5" />
+            <stroke android:width="1dp" android:color="#E0E0E0" />
+        </shape>
+    </item>
+</selector> 

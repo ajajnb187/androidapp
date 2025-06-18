@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    新闻图标矢量图资源
+    作用：用于底部导航栏中的"新闻"选项卡图标
+    
+    特点：
+    1. 使用矢量图(Vector Drawable)格式，可以无损缩放到任意尺寸
+    2. 基础尺寸为24x24dp，符合Material Design图标规范
+    3. 设计为新闻/报纸形状，直观表示新闻功能
+    4. 使用应用主题紫色(#6200EE)，与应用整体风格一致
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 
+        新闻图标路径数据
+        描绘了一个简化的报纸/文档图标，包含三条横线代表文本
+        填充颜色使用应用主色调#6200EE
+    -->
+    <path
+        android:fillColor="#6200EE"
+        android:pathData="M19,3L5,3c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2L21,5c0,-1.1 -0.9,-2 -2,-2zM14,17L7,17v-2h7v2zM17,13L7,13v-2h10v2zM17,9L7,9L7,7h10v2z"/>
+</vector> 
