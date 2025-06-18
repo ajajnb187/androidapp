@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    数据提取规则配置文件
+    作用：定义Android 12+系统中应用数据备份和恢复的规则
+    
+    此文件用于控制以下内容：
+    1. 云备份 - 通过<cloud-backup>标签定义哪些数据可以备份到云端
+    2. 设备转移 - 通过<device-transfer>标签定义在设备间迁移时哪些数据可以转移
+    
+    可以使用<include>和<exclude>标签精确控制哪些文件/目录需要备份或排除
+    参考文档: https://developer.android.com/about/versions/12/backup-restore#xml-changes
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- 
+            云备份规则配置
+            可使用<include>标签指定需要备份的文件/目录
+            可使用<exclude>标签指定不需要备份的文件/目录
+            示例:
+            <include domain="sharedpref" path="."/>
+            <exclude domain="sharedpref" path="sensitive_data.xml"/>
+        -->
+    </cloud-backup>
+    <!--
+    <device-transfer>
+        <!-- 
+            设备转移规则配置
+            用于控制在设备间迁移时哪些数据可以转移
+            语法与cloud-backup类似
+        -->
+    </device-transfer>
+    -->
+</data-extraction-rules>

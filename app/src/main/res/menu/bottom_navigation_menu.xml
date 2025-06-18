@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    底部导航栏菜单定义文件
+    作用：定义主界面底部导航栏的菜单项
+    包含两个主要导航选项：
+    1. 新闻页面 - 显示新闻内容列表
+    2. 个人中心页面 - 显示用户信息及相关功能
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 
+        新闻导航选项
+        作用：切换到新闻列表界面
+        使用ic_news图标，标题为"新闻"
+    -->
+    <item
+        android:id="@+id/nav_news"
+        android:icon="@drawable/ic_news"
+        android:title="新闻" />
+
+    <!-- 
+        个人中心导航选项
+        作用：切换到用户个人中心界面
+        使用ic_profile图标，标题为"我的"
+    -->
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="我的" />
+</menu> 

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    个人中心Fragment布局文件
+    作用：展示用户个人信息和提供相关功能入口
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. 顶部用户信息卡片区域
+    3. 中部功能菜单卡片区域
+    4. 底部退出登录按钮
+    
+    功能特点：
+    1. 显示用户基本资料（头像、昵称、手机、性别等）
+    2. 提供编辑资料入口
+    3. 提供浏览历史、关注、设置、检查更新等功能入口
+    4. 支持退出登录操作
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 
+        用户信息卡片
+        作用：显示用户基本资料信息
+        特点：
+        1. 卡片式设计，带阴影和圆角
+        2. 位于页面顶部，四周有适当间距
+        3. 包含用户头像、基本信息和编辑按钮
+        4. 高度随内容自适应
+    -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- 
+                用户头像
+                作用：显示用户头像图片
+                特点：
+                1. 固定尺寸80dp×80dp
+                2. 位于卡片左侧
+                3. 未设置图片时可能显示默认头像
+                4. 添加了内容描述以提高无障碍可访问性
+            -->
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <!-- 
+                用户昵称
+                作用：显示用户昵称或用户名
+                特点：
+                1. 粗体、黑色、较大字号(18sp)提升可读性
+                2. 位于头像右侧顶部对齐
+                3. 填满头像右侧到卡片右边缘的空间
+            -->
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+                app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+                tools:text="用户昵称" />
+
+            <!-- 
+                手机号码
+                作用：显示用户的手机号码(部分隐藏处理)
+                特点：
+                1. 灰色、小字号(14sp)的次要信息样式
+                2. 位于用户昵称下方，头像右侧
+                3. 通常会对中间部分进行隐藏处理，如"156****0862"
+            -->
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/tv_username"
+                tools:text="手机号: 156****0862" />
+
+            <!-- 
+                性别信息
+                作用：显示用户性别
+                特点：
+                1. 灰色、小字号(14sp)的次要信息样式
+                2. 位于手机号下方，头像右侧
+                3. 与生日信息并排显示
+            -->
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+                tools:text="性别: 男" />
+
+            <!-- 
+                生日信息
+                作用：显示用户生日
+                特点：
+                1. 灰色、小字号(14sp)的次要信息样式
+                2. 位于性别信息右侧
+                3. 通常显示为"生日: YYYY-MM-DD"格式
+            -->
+            <TextView
+                android:id="@+id/tv_birthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_gender"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+                tools:text="生日: 1990-01-01" />
+
+            <!-- 
+                邮箱信息
+                作用：显示用户邮箱地址
+                特点：
+                1. 灰色、小字号(14sp)的次要信息样式
+                2. 位于性别和生日下方
+                3. 可能为空或显示完整邮箱地址
+            -->
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/tv_gender"
+                tools:text="邮箱: user@example.com" />
+
+            <!-- 
+                编辑资料按钮
+                作用：跳转到编辑个人资料页面
+                特点：
+                1. 蓝色背景，白色文字，醒目易点击
+                2. 位于所有信息下方，靠右对齐
+                3. 使用较小字号和内边距，占用空间小但可点击区域足够
+                4. 点击后跳转到EditProfileActivity
+            -->
+            <Button
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="编辑资料"
+                android:textSize="12sp"
+                android:background="@android:color/holo_blue_light"
+                android:textColor="@android:color/white"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- 
+        功能菜单卡片
+        作用：提供各种功能入口
+        特点：
+        1. 卡片式设计，带阴影和圆角
+        2. 位于用户信息卡片下方
+        3. 包含多个功能选项，使用分割线分隔
+        4. 每项都有图标、文字和点击效果
+    -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_features"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_user_info">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 
+                浏览历史菜单项
+                作用：点击进入浏览历史页面
+                特点：
+                1. 左侧显示历史图标，右侧显示文字
+                2. 添加了水波纹点击效果
+                3. 点击后跳转到HistoryActivity
+                4. 16dp的内边距提供足够的点击区域
+            -->
+            <TextView
+                android:id="@+id/tv_history_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@android:drawable/ic_menu_recent_history"
+                android:drawablePadding="16dp"
+                android:padding="16dp"
+                android:text="浏览历史"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 菜单项分隔线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+            <!-- 
+                我的关注菜单项
+                作用：点击进入关注列表页面
+                特点：
+                1. 左侧显示星标图标，右侧显示文字
+                2. 添加了水波纹点击效果
+                3. 点击后跳转到FollowsActivity
+                4. 与其他菜单项保持一致的外观
+            -->
+            <TextView
+                android:id="@+id/tv_favorites_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@android:drawable/btn_star_big_on"
+                android:drawablePadding="16dp"
+                android:padding="16dp"
+                android:text="我的关注"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 菜单项分隔线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+            <!-- 
+                设置菜单项
+                作用：点击进入应用设置页面
+                特点：
+                1. 左侧显示设置/管理图标，右侧显示文字
+                2. 添加了水波纹点击效果
+                3. 点击后跳转到SettingsActivity
+                4. 与其他菜单项保持一致的外观
+            -->
+            <TextView
+                android:id="@+id/tv_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@android:drawable/ic_menu_manage"
+                android:drawablePadding="16dp"
+                android:padding="16dp"
+                android:text="设置"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 菜单项分隔线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+            <!-- 
+                检查更新菜单项
+                作用：点击进入版本更新页面
+                特点：
+                1. 左侧显示信息图标，右侧显示文字
+                2. 添加了水波纹点击效果
+                3. 点击后跳转到UpdateActivity
+                4. 与其他菜单项保持一致的外观
+            -->
+            <TextView
+                android:id="@+id/tv_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@android:drawable/ic_menu_info_details"
+                android:drawablePadding="16dp"
+                android:padding="16dp"
+                android:text="检查更新"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- 
+        退出登录按钮
+        作用：注销当前用户并返回登录页面
+        特点：
+        1. 醒目的红色背景，白色文字
+        2. 全宽显示，位于页面底部
+        3. 与上方卡片保持足够间距(32dp)
+        4. 点击后会先弹出确认对话框，确认后才执行登出操作
+    -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FF5252"
+        android:text="退出登录"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_features" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

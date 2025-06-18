@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    应用主题资源定义文件(亮色模式)
+    作用：定义应用亮色模式下的主题样式和视觉风格
+    主要内容：
+    1. 基础应用主题(Theme.XinwenApp) - 应用默认主题样式
+    2. 启动页专用主题(Theme.XinwenApp.Splash) - 启动页特殊样式
+    3. 无标题栏主题(Theme.XinwenApp.NoActionBar) - 用于特殊页面
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 
+        基础应用主题
+        继承自Material Design日夜主题，默认不带ActionBar
+        定义了应用的基础颜色系统、状态栏颜色和文字样式
+    -->
+    <style name="Theme.XinwenApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- 主要品牌颜色 - 用于主要UI元素(如顶部应用栏、主要按钮等) -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- 次要品牌颜色 - 用于次要UI元素(如浮动按钮、选择控件等) -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- 状态栏颜色 - 设置为主要品牌深色值 -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- 自定义主题属性 -->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColorHint">@color/textColorHint</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
+    </style>
+    
+    <!-- 
+        启动页专用主题
+        继承自基础应用主题，添加以下特性：
+        1. 纯白背景色 - 提供干净的启动体验
+        2. 全屏显示 - 隐藏状态栏，提供沉浸式体验
+        用于SplashActivity
+    -->
+    <style name="Theme.XinwenApp.Splash" parent="Theme.XinwenApp">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    
+    <!-- 
+        无标题栏主题
+        继承自基础应用主题，添加以下特性：
+        1. 无ActionBar - 完全隐藏顶部操作栏
+        2. 无标题 - 不显示应用标题
+        3. 非全屏 - 保留状态栏
+        适用于需要自定义顶部栏的页面
+    -->
+    <style name="Theme.XinwenApp.NoActionBar" parent="Theme.XinwenApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+</resources>

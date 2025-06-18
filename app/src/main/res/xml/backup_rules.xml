@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    应用数据备份规则配置文件
+    作用：定义应用数据自动备份的规则
+    
+    此文件用于控制以下内容：
+    1. 指定哪些应用数据需要备份
+    2. 指定哪些敏感数据应该排除在备份之外
+    
+    注意：
+    - 此配置仅适用于API 31(Android 12)及更高版本
+    - 较低版本的设备会忽略此文件
+    - 可以使用<include>和<exclude>标签精确控制需要备份或排除的内容
+    
+    参考文档: 
+    https://developer.android.com/guide/topics/data/autobackup
+    https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!-- 
+        备份规则示例:
+        <include domain="sharedpref" path="."/> - 备份所有SharedPreferences
+        <exclude domain="sharedpref" path="device.xml"/> - 排除特定的配置文件
+        
+        domain可选值:
+        - root (文件系统根目录)
+        - file (app内部存储的文件)
+        - database (SQLite数据库)
+        - sharedpref (SharedPreferences)
+        - external (外部存储)
+    -->
+</full-backup-content>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    版本更新页面布局文件
+    作用：提供检查和下载应用更新的界面
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. 顶部Toolbar显示标题并提供导航
+    3. 更新信息展示卡片，包含：
+       - 当前版本和最新版本信息
+       - 更新内容描述
+       - 下载进度条（默认隐藏）
+       - 下载进度文本（默认隐藏）
+       - 检查更新和下载更新按钮
+    
+    功能特点：
+    1. 显示当前应用版本和服务器最新版本
+    2. 展示更新内容和更新日志
+    3. 提供一键检查更新功能
+    4. 支持下载更新并显示下载进度
+    5. 下载完成后可安装更新
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.UpdateActivity">
+
+    <!-- 
+        顶部工具栏
+        作用：显示页面标题并提供导航功能
+        特点：
+        1. 使用应用主题色作为背景
+        2. 标题显示"检查更新"
+        3. 白色标题文本增强可读性
+        4. 提供返回按钮导航至上一页面
+    -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="检查更新"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- 
+        更新信息卡片
+        作用：集中展示所有更新相关信息和操作
+        特点：
+        1. 卡片式设计，带阴影和圆角
+        2. 位于Toolbar下方，四周有适当间距
+        3. 包含版本信息、更新日志和操作按钮
+        4. 内部使用线性布局垂直排列各元素
+    -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 
+                当前版本信息
+                作用：显示当前安装的应用版本
+                特点：
+                1. 黑色文字提升可读性
+                2. 显示格式："当前版本：vX.Y.Z"
+                3. 从应用包信息(PackageInfo)获取版本号
+            -->
+            <TextView
+                android:id="@+id/tv_current_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="当前版本：v1.0.0"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 
+                最新版本信息
+                作用：显示服务器上的最新版本
+                特点：
+                1. 黑色文字提升可读性
+                2. 显示格式："最新版本：vX.Y.Z"
+                3. 通过网络请求从服务器获取最新版本信息
+                4. 与当前版本对比可知是否需要更新
+            -->
+            <TextView
+                android:id="@+id/tv_latest_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="最新版本：v1.0.0"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 
+                更新内容标签
+                作用：作为更新日志内容的标题
+                特点：
+                1. 黑色文字，与版本信息保持一致样式
+                2. 与上方版本信息保持一定间距(16dp)
+            -->
+            <TextView
+                android:id="@+id/tv_update_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="更新内容："
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- 
+                更新内容详情
+                作用：显示本次更新的具体内容
+                特点：
+                1. 灰色文字表示次要信息
+                2. 通常以列表形式展示多条更新内容
+                3. 从服务器获取更新日志内容
+                4. 支持显示多行文本
+            -->
+            <TextView
+                android:id="@+id/tv_update_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="1. 修复已知问题\n2. 优化用户体验\n3. 新增更多功能"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <!-- 
+                下载进度条
+                作用：在下载更新时显示下载进度
+                特点：
+                1. 水平进度条样式
+                2. 默认隐藏，开始下载后显示
+                3. 随下载进度更新进度值
+                4. 与其他元素保持一定间距(16dp)
+            -->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
+
+            <!-- 
+                下载进度文本
+                作用：以百分比形式显示具体下载进度
+                特点：
+                1. 居中对齐的文本
+                2. 默认隐藏，开始下载后显示
+                3. 显示格式："下载中：XX%"
+                4. 与进度条配合使用，提供更精确的进度信息
+            -->
+            <TextView
+                android:id="@+id/tv_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="下载中：0%"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <!-- 
+                检查更新按钮
+                作用：触发检查更新操作
+                特点：
+                1. 全宽按钮，视觉效果明显
+                2. 上方留有足够间距(16dp)
+                3. 点击后会向服务器请求最新版本信息
+                4. 若有新版本，会更新界面信息并启用下载按钮
+            -->
+            <Button
+                android:id="@+id/btn_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="检查更新" />
+
+            <!-- 
+                下载更新按钮
+                作用：触发下载新版本操作
+                特点：
+                1. 全宽按钮，视觉效果明显
+                2. 默认隐藏状态，有新版本时才显示
+                3. 默认禁用状态，检查到新版本后启用
+                4. 点击后开始下载更新并显示进度信息
+                5. 下载完成后自动处理安装流程
+            -->
+            <Button
+                android:id="@+id/btn_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:enabled="false"
+                android:text="下载更新"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

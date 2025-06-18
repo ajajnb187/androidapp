@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    应用主界面布局文件
+    作用：应用的主要容器布局，包含底部导航栏和可滑动的内容区域
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. ViewPager2用于横向滑动切换不同的主要功能页面(新闻、个人中心)
+    3. 底部导航栏(BottomNavigationView)提供页面切换的快捷方式
+    
+    导航逻辑：
+    1. 底部导航栏点击切换时会联动ViewPager2切换页面
+    2. 左右滑动ViewPager2时会联动底部导航栏高亮对应的选项
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 
+        主内容区域ViewPager2
+        作用：容纳并提供新闻列表和个人中心两个主要Fragment的横向切换
+        特点：
+        1. 占据除底部导航栏外的所有空间
+        2. 由MainFragmentAdapter适配器管理Fragment
+        3. 支持左右滑动手势切换页面
+        4. 预加载机制提高切换流畅度
+    -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 
+        底部导航栏
+        作用：提供新闻和个人中心两个主要功能区域的快速切换
+        特点：
+        1. 位于屏幕底部，宽度与屏幕等宽
+        2. 使用底部导航菜单(bottom_navigation_menu.xml)定义菜单项
+        3. 含有图标和文字标签，视觉提示明确
+        4. 与ViewPager2联动，支持点击切换和滑动联动
+    -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

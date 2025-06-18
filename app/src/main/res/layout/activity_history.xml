@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    浏览历史页面布局文件
+    作用：展示用户浏览过的新闻记录
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. 顶部Toolbar显示标题并提供导航
+    3. 中间RecyclerView显示历史记录列表
+    4. 空记录提示文本（初始隐藏）
+    5. 底部清空历史按钮
+    6. 加载进度条（初始隐藏）
+    
+    功能特点：
+    1. 可查看所有历史浏览记录
+    2. 支持一键清空所有历史
+    3. 无历史记录时显示提示文本
+    4. 加载数据时显示进度条
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.HistoryActivity">
+
+    <!-- 
+        顶部工具栏
+        作用：显示页面标题并提供导航功能
+        特点：
+        1. 使用应用主题色作为背景
+        2. 标题显示"浏览历史"
+        3. 白色标题文本增强可读性
+        4. 提供返回按钮导航至上一页面
+    -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="浏览历史"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- 
+        历史记录列表
+        作用：展示用户所有浏览过的新闻
+        特点：
+        1. 垂直滚动列表，自动适应数据量
+        2. 占据Toolbar下方到清空按钮上方的所有空间
+        3. 使用NewsAdapter或专用HistoryAdapter展示数据
+        4. 点击列表项可跳转到对应的新闻详情
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_clear_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <!-- 
+        空记录提示文本
+        作用：在没有历史记录时显示提示信息
+        特点：
+        1. 居中显示"暂无浏览历史"提示
+        2. 初始状态为隐藏(gone)
+        3. 当历史记录为空时通过Java代码设为可见
+    -->
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="暂无浏览历史"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <!-- 
+        清空历史按钮
+        作用：一键删除所有浏览历史记录
+        特点：
+        1. 位于页面底部，全宽显示
+        2. 四周设置16dp的外边距
+        3. 点击后会弹出确认对话框
+        4. 确认后调用NewsRepository清空历史数据
+    -->
+    <Button
+        android:id="@+id/btn_clear_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="清空历史"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+        
+    <!-- 
+        加载进度条
+        作用：在加载历史数据时显示loading状态
+        特点：
+        1. 居中显示的圆形进度指示器
+        2. 初始状态为隐藏(gone)
+        3. 数据加载开始时显示，加载完成后隐藏
+    -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

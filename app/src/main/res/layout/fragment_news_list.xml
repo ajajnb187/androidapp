@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    新闻列表Fragment布局文件
+    作用：展示新闻分类导航栏和对应分类下的新闻列表
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. 顶部是横向滚动的分类标签RecyclerView
+    3. 中间是可下拉刷新的新闻列表区域
+    4. 右下角是分类管理的浮动按钮
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 
+        新闻分类标签列表
+        作用：展示所有可选新闻分类并提供快速切换功能
+        特点：
+        1. 横向布局，可左右滑动查看所有分类
+        2. 白色背景和2dp阴影提升视觉层次感
+        3. 四周内边距确保标签显示美观
+        4. 使用CategoryAdapter适配器管理数据绑定
+        5. 点击不同分类标签可切换下方新闻列表内容
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 
+        下拉刷新容器
+        作用：包装新闻列表，提供下拉刷新功能
+        特点：
+        1. 占据分类标签下方到屏幕底部的所有空间
+        2. 下拉时会触发刷新动作，更新新闻列表数据
+        3. 刷新时顶部会显示加载动画
+    -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_categories">
+
+        <!-- 
+            新闻列表
+            作用：展示当前选中分类下的新闻列表
+            特点：
+            1. 垂直线性布局显示新闻项
+            2. 使用NewsAdapter适配器管理数据绑定
+            3. 顶部和底部添加8dp内边距提升视觉效果
+            4. 点击单条新闻可跳转到新闻详情页
+            5. 使用item_news.xml作为列表项布局模板
+        -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_news" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- 
+        分类管理按钮
+        作用：提供快速进入分类管理页面的入口
+        特点：
+        1. 浮动按钮样式，位于右下角
+        2. 使用系统自带的管理/设置图标
+        3. 16dp的外边距确保与屏幕边缘有适当间距
+        4. 点击后跳转到CategoryManagementActivity
+        5. 添加了内容描述以提高无障碍可访问性
+    -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_category_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="管理分类"
+        android:src="@android:drawable/ic_menu_manage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- 存储权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
+                     android:maxSdkVersion="28" />
+                     
+    <!-- 短信权限 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    
+    <!-- 声明电话功能不是必须的，允许在没有电话功能的设备上安装 -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    
+    <!-- 通知权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".XinwenApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.XinwenApp"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <!-- 启动页 -->
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.XinwenApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 登录页 -->
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:exported="false" />
+
+        <!-- 注册页 -->
+        <activity
+            android:name=".view.activity.RegisterActivity"
+            android:exported="false" />
+
+        <!-- 找回密码页 -->
+        <activity
+            android:name=".view.activity.ForgotPasswordActivity"
+            android:exported="false" />
+
+        <!-- 新闻详情页 -->
+        <activity
+            android:name=".view.activity.NewsDetailActivity"
+            android:exported="false" />
+
+        <!-- 主界面 -->
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:exported="false" />
+            
+        <!-- 浏览历史页面 -->
+        <activity
+            android:name=".view.activity.HistoryActivity"
+            android:exported="false" />
+            
+        <!-- 关注列表页面 -->
+        <activity
+            android:name=".view.activity.FollowsActivity"
+            android:exported="false" />
+            
+        <!-- 设置页面 -->
+        <activity
+            android:name=".view.activity.SettingsActivity"
+            android:exported="false" />
+            
+        <!-- 编辑个人资料页面 -->
+        <activity
+            android:name=".view.activity.EditProfileActivity"
+            android:exported="false" />
+            
+        <!-- 修改密码页面 -->
+        <activity
+            android:name=".view.activity.ChangePasswordActivity"
+            android:exported="false" />
+            
+        <!-- 版本更新页面 -->
+        <activity
+            android:name=".view.activity.UpdateActivity"
+            android:exported="false" />
+
+        <!-- 新闻分类管理页面 -->
+        <activity
+            android:name=".view.activity.CategoryManagementActivity"
+            android:exported="false"
+            android:label="新闻分类管理"
+            android:parentActivityName=".view.activity.MainActivity" />
+    </application>
+
+</manifest>

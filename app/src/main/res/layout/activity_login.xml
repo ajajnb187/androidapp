@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    登录页面布局文件
+    作用：提供用户登录应用的界面
+    
+    整体结构：
+    1. LinearLayout垂直布局作为根容器
+    2. 顶部页面标题
+    3. 手机号输入区域
+    4. 密码输入区域
+    5. 找回密码和注册链接区域
+    6. 底部登录按钮
+    
+    交互流程：
+    1. 用户输入注册手机号和密码
+    2. 点击登录按钮验证身份
+    3. 若需要可点击找回密码或注册新账号
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 
+        页面标题
+        作用：明确告知用户当前页面功能
+        特点：
+        1. 居中显示，使用粗体大号字体提升层级
+        2. 上下留有足够边距，视觉效果更佳
+    -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="用户登录"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- 
+        手机号输入区域
+        作用：用户输入已注册的手机号码
+        特点：
+        1. 垂直布局包含标签和输入框
+        2. 限制只能输入11位数字（符合中国手机号规则）
+        3. 使用电话输入类型优化数字键盘体验
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:maxLength="11" />
+    </LinearLayout>
+
+    <!-- 
+        密码输入区域
+        作用：输入账号密码进行身份验证
+        特点：
+        1. 垂直布局包含标签和输入框
+        2. 使用密码输入类型自动隐藏输入内容
+        3. 不设置最大长度以适应各种密码策略
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <!-- 
+        辅助功能链接区域
+        作用：提供找回密码和注册新账号的快捷入口
+        特点：
+        1. 水平布局包含两个文本链接
+        2. 找回密码靠左对齐，注册链接靠右对齐
+        3. 使用蓝色文本增强可点击暗示
+        4. 点击后分别跳转到相应页面
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <!-- 找回密码链接：跳转到ForgotPasswordActivity -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="找回密码"
+            android:textColor="#2196F3" />
+
+        <!-- 注册链接：跳转到RegisterActivity -->
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即注册"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <!-- 
+        登录按钮
+        作用：提交表单，验证用户身份
+        特点：
+        1. 全宽按钮，视觉效果明显
+        2. 上方留有足够间距，避免误触
+        3. 点击后会验证手机号和密码，调用UserController处理登录
+        4. 登录成功后会导航到MainActivity
+    -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="登录" />
+
+</LinearLayout> 

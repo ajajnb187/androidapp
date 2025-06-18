@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    启动页广告项布局文件
+    作用：定义启动页ViewPager2中每个广告项的布局
+    
+    整体结构：
+    1. 使用FrameLayout作为根布局，占满整个屏幕
+    2. 包含一个全屏显示的ImageView用于展示广告图片
+    
+    使用场景：
+    1. 在SplashActivity的ViewPager2中作为item使用
+    2. 由SplashAdAdapter适配器加载并绑定数据
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 
+        广告图片视图
+        作用：显示广告内容图片
+        特点：
+        1. 充满整个屏幕
+        2. 使用centerCrop缩放模式确保图片填满界面且不变形
+        3. 添加了内容描述以提高无障碍可访问性
+    -->
+    <ImageView
+        android:id="@+id/ivAd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="广告图片"
+        android:scaleType="centerCrop" />
+
+</FrameLayout> 

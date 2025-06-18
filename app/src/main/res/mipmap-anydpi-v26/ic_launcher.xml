@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    应用图标自适应配置文件
+    作用：为Android 8.0(API 26)及以上设备定义自适应应用图标
+    
+    自适应图标特点：
+    1. 分为背景层和前景层，系统可以对其进行动画效果处理
+    2. 可以适应不同的启动器形状(圆形、方形、圆角方形等)
+    3. 提供统一且现代的应用图标体验
+    
+    anydpi-v26目录：表示此资源适用于API 26及以上的任意像素密度设备
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景层：定义图标的背景部分(通常为纯色或简单图案) -->
+    <background android:drawable="@drawable/ic_launcher_background"/>
+    <!-- 前景层：定义图标的前景部分(通常为应用的徽标或标识) -->
+    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+</adaptive-icon>

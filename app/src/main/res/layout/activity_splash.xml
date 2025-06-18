@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    启动页(闪屏页)布局文件
+    作用：应用启动时展示的第一个界面，用于品牌展示和广告展示
+    整体结构：
+    1. 相对布局(RelativeLayout)作为根布局
+    2. ViewPager2用于展示广告轮播
+    3. 右上角的倒计时跳过按钮
+    4. 底部居中的"立即体验"按钮(默认隐藏)
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 
+        广告图片轮播组件
+        作用：展示启动页广告内容
+        特点：全屏展示，使用ViewPager2实现左右滑动切换效果
+    -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerAds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 
+        倒计时跳过按钮
+        作用：展示倒计时并允许用户提前跳过广告
+        特点：
+        1. 位于右上角，半透明背景
+        2. 点击可直接跳过广告
+        3. 显示剩余广告时间
+    -->
+    <TextView
+        android:id="@+id/tvSkipCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_skip_button"
+        android:padding="8dp"
+        android:text="跳过 5s"
+        android:textColor="#FFFFFF"
+        android:clickable="true"
+        android:focusable="true" />
+    
+    <!-- 
+        立即体验按钮
+        作用：在广告最后一页显示，用户点击后进入应用主界面
+        特点：居中显示在底部，默认隐藏状态，广告最后一页时才显示
+    -->
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="立即体验"
+        android:visibility="gone" />
+
+</RelativeLayout> 

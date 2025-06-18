@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    颜色资源定义文件
+    作用：集中定义应用中使用的所有颜色值，便于统一管理和修改
+    包含多个颜色分组：
+    1. Material Design默认颜色
+    2. 应用主题颜色
+    3. 文本颜色
+    4. 背景颜色
+    5. 其他辅助颜色
+    6. 分类标签颜色
+-->
+<resources>
+    <!-- Material Design默认颜色 - 与系统默认主题匹配 -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- App主题颜色 - 定义应用的品牌颜色 -->
+    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorPrimaryDark">#FF3700B3</color>
+    <color name="colorAccent">#FF03DAC5</color>
+    
+    <!-- 文本颜色 - 定义不同级别的文本颜色 -->
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textColorHint">#BDBDBD</color>
+    
+    <!-- 背景颜色 - 定义页面和卡片背景颜色 -->
+    <color name="backgroundColor">#FAFAFA</color>
+    <color name="cardBackground">#FFFFFF</color>
+    
+    <!-- 其他颜色 - 用于分割线、涟漪效果等 -->
+    <color name="dividerColor">#EEEEEE</color>
+    <color name="rippleColor">#33000000</color>
+    
+    <!-- 分类标签颜色 - 用于新闻分类标签样式 -->
+    <color name="category_tab_selected">#FF6200EE</color>
+    <color name="category_tab_unselected">#F5F5F5</color>
+    <color name="category_tab_text">#212121</color>
+    <color name="category_tab_text_selected">#FFFFFF</color>
+</resources>

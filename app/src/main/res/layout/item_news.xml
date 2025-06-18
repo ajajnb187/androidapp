@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    新闻列表项布局文件
+    作用：在新闻列表中展示单条新闻的简要信息
+    
+    整体结构：
+    1. CardView作为卡片式外观容器，提供圆角和阴影效果
+    2. 内部使用ConstraintLayout约束定位各元素
+    3. 左侧区域显示新闻标题和来源信息
+    4. 右侧显示新闻缩略图
+    
+    设计特点：
+    1. 标题粗体显示并限制最多2行，过长部分使用省略号
+    2. 来源和时间信息使用较小字号和灰色，位于标题下方
+    3. 缩略图固定尺寸(80dp×60dp)，使用centerCrop缩放模式
+    4. 整体使用卡片式设计，四周有适当间距
+-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- 
+            新闻标题
+            作用：显示新闻的标题内容
+            特点：
+            1. 位于左侧区域，右边留出空间给缩略图
+            2. 粗体、黑色、16sp大小提升可读性
+            3. 最多显示2行，超出部分用省略号表示
+            4. 标题是吸引用户点击阅读的关键元素
+        -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/iv_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="这是一条新闻标题，可能会很长很长很长很长很长很长" />
+
+        <!-- 
+            新闻来源和时间
+            作用：显示新闻的出处和发布时间
+            特点：
+            1. 位于标题下方，右边同样留出空间给缩略图
+            2. 灰色、小字号(12sp)的设计降低视觉权重
+            3. 单行显示，过长时使用省略号
+            4. 通常格式为"来源媒体 · 发布时间"，如"新华网 · 10分钟前"
+        -->
+        <TextView
+            android:id="@+id/tv_source_and_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="新华网 · 10分钟前" />
+
+        <!-- 
+            新闻缩略图
+            作用：展示新闻相关的图片，提升视觉吸引力
+            特点：
+            1. 位于右侧，固定尺寸(80dp×60dp)
+            2. 使用centerCrop缩放模式确保图片填满且不变形
+            3. 当新闻无图片时可能会隐藏此控件
+            4. 添加了内容描述以提高无障碍可访问性
+        -->
+        <ImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView> 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    圆形应用图标自适应配置文件
+    作用：为Android 8.0(API 26)及以上设备定义圆形风格的自适应应用图标
+    
+    与常规ic_launcher.xml区别：
+    1. 此文件专门用于圆形图标显示场景
+    2. 在支持图标形状选择的启动器中，用户选择圆形图标时将使用此配置
+    
+    注意：
+    1. 内容通常与常规ic_launcher.xml相同
+    2. 主要是为了向后兼容和保证在不支持自适应图标的设备上仍能显示圆形图标
+    3. 在Android 8.0以上系统中，自适应图标机制已经可以自动处理不同形状的显示
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景层：定义圆形图标的背景部分 -->
+    <background android:drawable="@drawable/ic_launcher_background"/>
+    <!-- 前景层：定义圆形图标的前景部分 -->
+    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+</adaptive-icon>

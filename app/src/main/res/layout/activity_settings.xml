@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    设置页面布局文件
+    作用：提供应用各项设置的管理界面
+    
+    整体结构：
+    1. ConstraintLayout作为根布局，实现灵活的约束定位
+    2. 顶部Toolbar显示标题并提供导航
+    3. ScrollView包裹所有内容确保在小屏幕上可滚动查看
+    4. 内部分为三个主要卡片区域：
+       - 个人资料设置卡片
+       - 应用设置卡片
+       - 关于信息卡片
+    
+    功能特点：
+    1. 提供编辑个人资料、修改密码入口
+    2. 管理推送通知开关、清除缓存、检查更新
+    3. 提供关于我们和意见反馈入口
+    4. 每个功能区域采用卡片式布局，清晰区分
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.SettingsActivity">
+
+    <!-- 
+        顶部工具栏
+        作用：显示页面标题并提供导航功能
+        特点：
+        1. 使用应用主题色作为背景
+        2. 标题显示"设置"
+        3. 白色标题文本增强可读性
+        4. 提供返回按钮导航至上一页面
+    -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="设置"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- 
+        内容滚动区域
+        作用：包含所有设置项卡片，支持垂直滚动
+        特点：
+        1. 占据Toolbar下方到屏幕底部的所有空间
+        2. 支持垂直滚动，确保所有设置项可见
+        3. 内部使用线性布局垂直排列各卡片
+    -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 
+                个人资料设置卡片
+                作用：提供与用户个人资料相关的设置入口
+                特点：
+                1. 卡片式设计，带阴影和圆角
+                2. 四周有16dp间距，与其他卡片区分
+                3. 包含灰色标题区域和多个设置项
+                4. 每个设置项都有点击效果和操作图标
+            -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 
+                        卡片标题
+                        作用：标识卡片的功能类别
+                        特点：
+                        1. 浅灰色背景区分于设置项
+                        2. 粗体黑色文字，强调标题属性
+                        3. 8dp的内边距确保文字不贴近边缘
+                    -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F5F5F5"
+                        android:padding="8dp"
+                        android:text="个人资料"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- 
+                        编辑个人资料选项
+                        作用：跳转到个人资料编辑页面
+                        特点：
+                        1. 水平布局包含功能名称和操作图标
+                        2. 添加了水波纹点击效果
+                        3. 点击后跳转到EditProfileActivity
+                        4. 左侧功能名称占据大部分空间，右侧图标提示操作性质
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_edit_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="编辑个人资料"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@android:drawable/ic_menu_edit" />
+                    </LinearLayout>
+
+                    <!-- 设置项分隔线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- 
+                        修改密码选项
+                        作用：跳转到密码修改页面
+                        特点：
+                        1. 水平布局包含功能名称和操作图标
+                        2. 添加了水波纹点击效果
+                        3. 点击后跳转到ChangePasswordActivity
+                        4. 使用锁形图标暗示密码安全相关功能
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_change_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="修改密码"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@android:drawable/ic_lock_lock" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 
+                应用设置卡片
+                作用：提供应用功能相关的设置选项
+                特点：
+                1. 卡片式设计，与个人资料卡片保持一致样式
+                2. 包含推送通知开关、清除缓存和检查更新功能
+                3. 每个设置项都有相应的图标或指示器
+            -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 卡片标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F5F5F5"
+                        android:padding="8dp"
+                        android:text="应用设置"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- 
+                        推送通知开关选项
+                        作用：控制应用的推送通知功能
+                        特点：
+                        1. 水平布局包含功能名称和开关控件
+                        2. 使用SwitchCompat确保向后兼容性
+                        3. 默认为开启状态
+                        4. 开关状态变化会触发通知设置的更新
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="推送通知"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switch_notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+
+                    <!-- 设置项分隔线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- 
+                        清除缓存选项
+                        作用：清空应用缓存数据
+                        特点：
+                        1. 水平布局包含功能名称和缓存大小指示
+                        2. 添加了水波纹点击效果
+                        3. 右侧显示当前缓存大小
+                        4. 点击后会弹出确认对话框，确认后清除缓存
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_clear_cache"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="清除缓存"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_cache_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0MB"
+                            android:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
+
+                    <!-- 设置项分隔线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- 
+                        检查更新选项
+                        作用：跳转到版本更新页面
+                        特点：
+                        1. 水平布局包含功能名称和当前版本指示
+                        2. 添加了水波纹点击效果
+                        3. 右侧显示当前应用版本号
+                        4. 点击后跳转到UpdateActivity
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_check_update"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="检查更新"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="v1.0.0"
+                            android:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 
+                关于信息卡片
+                作用：提供应用介绍和反馈功能
+                特点：
+                1. 卡片式设计，与其他卡片保持一致样式
+                2. 包含关于我们和意见反馈两个选项
+                3. 每个选项右侧都有相应的图标
+            -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 卡片标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F5F5F5"
+                        android:padding="8dp"
+                        android:text="关于"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- 
+                        关于我们选项
+                        作用：显示应用和开发者的相关信息
+                        特点：
+                        1. 水平布局包含功能名称和信息图标
+                        2. 添加了水波纹点击效果
+                        3. 点击后可能会显示应用介绍对话框或跳转到关于页面
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_about_us"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="关于我们"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@android:drawable/ic_menu_info_details" />
+                    </LinearLayout>
+
+                    <!-- 设置项分隔线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- 
+                        意见反馈选项
+                        作用：提供用户反馈渠道
+                        特点：
+                        1. 水平布局包含功能名称和发送图标
+                        2. 添加了水波纹点击效果
+                        3. 点击后可能会打开反馈表单或发送邮件
+                        4. 使用发送图标暗示信息提交功能
+                    -->
+                    <LinearLayout
+                        android:id="@+id/layout_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="意见反馈"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@android:drawable/ic_menu_send" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout> 
