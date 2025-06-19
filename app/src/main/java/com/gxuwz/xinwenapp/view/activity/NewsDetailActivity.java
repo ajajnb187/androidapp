@@ -217,9 +217,33 @@ public class NewsDetailActivity extends AppCompatActivity {
                 if (currentNews != null && currentNews.getUrl() != null && !currentNews.getUrl().isEmpty()) {
                     Log.d(TAG, "尝试使用WebView加载URL: " + currentNews.getUrl());
                     loadNewsWithWebView(currentNews.getUrl());
+                    
+                    // 即使使用WebView加载，也记录浏览历史
+                    if (currentNews.getUniqueKey() != null && !currentNews.getUniqueKey().isEmpty()) {
+                        executor.execute(() -> {
+                            try {
+                                historyId = newsController.recordNewsHistory(currentNews.getUniqueKey());
+                                Log.d(TAG, "WebView加载时记录浏览历史: newsId=" + currentNews.getUniqueKey() + ", historyId=" + historyId);
+                            } catch (Exception e) {
+                                Log.e(TAG, "记录浏览历史失败: " + e.getMessage(), e);
+                            }
+                        });
+                    }
                 } else if (newsUrl != null && !newsUrl.isEmpty()) {
                     Log.d(TAG, "尝试使用传入的URL加载: " + newsUrl);
                     loadNewsWithWebView(newsUrl);
+                    
+                    // 使用newsId记录历史（如果有）
+                    if (newsId != null && !newsId.isEmpty()) {
+                        executor.execute(() -> {
+                            try {
+                                historyId = newsController.recordNewsHistory(newsId);
+                                Log.d(TAG, "使用newsId记录浏览历史: newsId=" + newsId + ", historyId=" + historyId);
+                            } catch (Exception e) {
+                                Log.e(TAG, "记录浏览历史失败: " + e.getMessage(), e);
+                            }
+                        });
+                    }
                 } else {
                     Toast.makeText(NewsDetailActivity.this, "加载新闻失败: " + errorMsg, Toast.LENGTH_SHORT).show();
                 }
