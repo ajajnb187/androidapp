@@ -1,5 +1,7 @@
 package com.gxuwz.xinwenapp;
 
 public class demo {
-  //adhaofhoaq
+  public viod dome(){
+    
+  }
 }
