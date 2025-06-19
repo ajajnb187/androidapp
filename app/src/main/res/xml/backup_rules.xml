@@ -17,7 +17,7 @@
     https://developer.android.com/about/versions/12/backup-restore
 -->
 <full-backup-content>
-    <!-- 
+    <!--
         备份规则示例:
         <include domain="sharedpref" path="."/> - 备份所有SharedPreferences
         <exclude domain="sharedpref" path="device.xml"/> - 排除特定的配置文件
@@ -28,5 +28,5 @@
         - database (SQLite数据库)
         - sharedpref (SharedPreferences)
         - external (外部存储)
-    -->
+-->
 </full-backup-content>
